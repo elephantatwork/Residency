@@ -1,0 +1,8 @@
+cron:
+- description: Start the competition
+  url: /publish/start
+  schedule: every 1 minutes
+
+- description: End the competition
+  url: /publish/end
+  schedule: every 1 minutes
