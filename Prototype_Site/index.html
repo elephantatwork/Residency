@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,11 +18,35 @@
 </head>
 
 <body>
-    <div class="contentPage" id="landing">
-    </div>
+    <div class="menubar">menu</div>
+    <div class="contentPage" id="landing">landing</div>
     <div class="contentPage" id="events">Residency Events</div>
     <div class="contentPage" id="description">Residency Description</div>
 
+
 </body>
+<script src="js/pageController.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script> -->
+
+<script>
+    var pageController = new PageController();
+
+
+
+    pageController.addPage(document.getElementById("landing")); // 0
+    pageController.addPage(document.getElementById("events")); // 1
+    pageController.addPage(document.getElementById("description")); // 2
+
+    pageController.hideAllPages();
+    // pageController.showPage(0);
+    // var left = $('#events').offset().left;
+
+    // $("#events").css({ left: left }).animate({ "left": "0px" }, 10000);
+
+    // var right = $('#description').offset().right;
+
+    // $("#description").css({ right: right }).animate({ "right": "0px" }, 20000);
+</script>
 
 </html>
