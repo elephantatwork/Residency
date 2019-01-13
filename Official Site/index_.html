@@ -27,6 +27,7 @@
             <div class="row">
                 <div class="col-4">
                     <h1 id="bE7">etage 7</h1>
+                    <div class="movingIn">still moving in</div>
                 </div>
                 <div class="col-4">
                     <h1 id="bE6">etage 6</h1>
@@ -65,8 +66,6 @@
     </div>
     <div class="contentPage" id="events">Residency Events
         <svg id="svg_events"></svg>
-
-
     </div>
 
     <div class="contentPage" id="description">
@@ -98,7 +97,7 @@
                         Fantasie und Realität vermischt.</p>
                 </div>
                 <div class="col-12" id="E6C">
-                    <h1 id="artistTitle">DAS MUSIK UND NÄHATELIER</h1>
+                    <h1 id="artistTitle">DAS KURATORENTEAM IM AUSTAUSCHMODUS</h1>
                     <h2 id="artistName">IOTUProjects ist Priscille Jotzu, Constantin Jotzu</h2>
                     <p id="artistDescription" style="display:none">«Wieso hängt die Kunst an der Wand und die Medizin
                         im Schrank?», fragt Schlingensief. Vielleicht kann man das anders sehen, damit man den Menschen
@@ -202,6 +201,20 @@
 <!-- <script src="js/libs/stats.min.js"></script> -->
 
 <!-- <script src="js/house.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyD52Vkl6CGe0ZK9BM-ISFbInmh82Bw12UQ",
+        authDomain: "residency-fe447.firebaseapp.com",
+        databaseURL: "https://residency-fe447.firebaseio.com",
+        projectId: "residency-fe447",
+        storageBucket: "residency-fe447.appspot.com",
+        messagingSenderId: "118663238849"
+    };
+    firebase.initializeApp(config);
+</script>
+<script src="js/firebase-database.js"></script>
 
 
 <script>
