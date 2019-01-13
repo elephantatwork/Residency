@@ -18,8 +18,10 @@
 </head>
 
 <body>
-    <button class="menubutton" onclick="toggleMenu()">x</button>
-
+    <div>
+        <button class="menubutton" onclick="toggleMenu()">☜</button>
+        <button class="pageIndicator" onclick="toggleMenu()">☜</button>
+    </div>
     <div class="menu" id="menu">
         <div class="menucontent">
             <div class="row">
@@ -433,22 +435,19 @@
         var button = document.getElementById("b" + id);
         var etage = document.getElementById(id);
 
-        console.log(button);
-        console.log(etage);
-
         button.addEventListener("click", function () {
             openEtage(id);
         }, false);
 
-        if (id != "about")
-            etage.style.display = "none";
+        etage.style.display = "none";
     }
     registerEtage("E7");
     registerEtage("E6");
     registerEtage("about");
 
     //Here we open the first etage
-    // openEtage("about");
+    openEtage("about");
+    currentPage = "main"; // hack
 
     function openEvents() {
         //if

@@ -17,7 +17,7 @@ html, body {
 
 #landing {
     z-index: 0;
-    background-color:whitesmoke;
+    background-color: whitesmoke;
 }
 
 #description {
@@ -29,7 +29,7 @@ html, body {
 #events {
     z-index: 2;
     /* left:100%; */
-    background-color:whitesmoke;
+    background-color: whitesmoke;
 }
 
 .overlays {
@@ -43,14 +43,13 @@ html, body {
     display:block; */
 }
 
-.contentFade{
+.contentFade {
     position: fixed;
-    top:50%;
-    bottom:0px;
+    top: 50%;
+    bottom: 0px;
     width: 100%;
     z-index: -1;
-    background-image: linear-gradient(rgba(255,255,255,0),rgba(236,187,187,255));
-
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(236, 187, 187, 255));
 }
 
 .menu {
@@ -84,9 +83,17 @@ html, body {
 
 .menubutton {
     position: absolute;
-    left: 24px;
-    top: 24px;
+    /* left: 24px; */
+    /* top: 24px; */
     z-index: 11;
+    /* width: 64px;
+    height: 64px; */
+    /* background-image: url("../assets/img/swan.png"); */
+    /* background-color: rgb(255, 255, 255);
+    background-size: cover; */
+    font-family: HiraginoSans-W6;
+    font-size: 80px;
+    color: #000000;
 }
 
 h1 {
