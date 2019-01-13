@@ -19,33 +19,76 @@
 
 <body>
     <div>
-        <button class="menubutton" onclick="toggleMenu()">☜</button>
-        <button class="pageIndicator" onclick="toggleMenu()">☜</button>
+        <button.lame class="disclaimerBox" onclick="hideDisclaimer()" id="workInProgress">
+            <p class="disclaimer">Diese Website ist im stetigen Wandel<br>Hab keine Angst!</p>
+        </button.lame>
+        <button class="menubutton" id="bMenu" onclick="toggleMenu()">&#9776;</button>
+        <button class="pageIndicator">this is the landing</button>
     </div>
     <div class="menu" id="menu">
         <div class="menucontent">
             <div class="row">
-                <div class="col-4">
-                    <h1 id="bE7">etage 7</h1>
-                    <div class="movingIn">still moving in</div>
+                <div class="col-4" style="height:80px">
+                    <div>
+                        <h1 id="bE9">etage 9</h1>
+                        <div class="movingIn">
+                            <p class="movingInText">still moving in</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4" style="height:80px">
+                    <div>
+                        <h1 id="bE8">etage 8</h1>
+                        <div class="movingIn">
+                            <p class="movingInText">still moving in</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4" style="height:80px">
+                    <div>
+                        <h1 id="bE7">etage 7</h1>
+                        <div class="movingIn">
+                            <p class="movingInText">still moving in</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4" style="height:80px">
                     <h1 id="bE6">etage 6</h1>
+                    <div class="movingIn">
+                        <p class="movingInText">still moving in</p>
+                    </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4" style="height:80px">
                     <h1 id="bE5">etage 5</h1>
+                    <div class="movingIn">
+                        <p class="movingInText">still moving in</p>
+                    </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4" style="height:80px">
                     <h1 id="bE4">etage 4</h1>
+                    <div class="movingIn">
+                        <p class="movingInText">still moving in</p>
+                    </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4" style="height:80px">
                     <h1 id="bE3">etage 3</h1>
+                    <div class="movingIn">
+                        <p class="movingInText">still moving in</p>
+                    </div>
                 </div>
-                <h1 id="bE2">etage 2</h1>
-                <div class="col-4">
+                <div class="col-4" style="height:80px">
+                    <h1 id="bE2">etage 2</h1>
+                    <div class="movingIn">
+                        <p class="movingInText">still moving in</p>
+                    </div>
+                </div>
+                <div class="col-4" style="height:80px">
                     <h1 id="bE1">etage 1</h1>
+                    <div class="movingIn">
+                        <p class="movingInText">still moving in</p>
+                    </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4" style="height:80px">
                     <h1 id="bevents" onclick="openEvents()">events</h1>
                 </div>
                 <div class="col-4">
@@ -179,7 +222,7 @@
                     <h3 id="artistDescription" style="display:block">
                         Website</h3>
                     <p id="artistDescription" style="display:block">
-                        Von Schick</p>
+                        Von Schick cooperative</p>
                 </div>
             </div>
         </div>
@@ -221,6 +264,7 @@
     // var pageController = new PageController();
     //UI
     var menuDiv = document.getElementById("menu");
+    var menuButtonDiv = document.getElementById("bMenu");
     var currentPage;
 
     // console.log(pageController);
@@ -420,23 +464,44 @@
 
 
     //UI
+
+
+
     var menuVisible = true;
+
+    function changePage(id) {
+       currentPage = id;
+       
+       if(currentPage == ""){
+
+       }else{
+
+       }
+    }
+
     function toggleMenu(state) {
 
         console.log(state);
 
         state = state || !menuVisible;
 
-        console.log(state);
-
-
         menuVisible = state;
 
-        if (menuVisible)
+        if (menuVisible) {
             menuDiv.style.display = "block";
-        else
+        } else {
             menuDiv.style.display = "none";
+        }
 
+
+        // if (menuVisible) {
+        //     menuButtonDiv.innerHTML = "☜";
+        //     menuDiv.style.display = "block";
+        // } else {
+        //     menuButtonDiv.innerHTML = "&#9776";
+
+        //     menuDiv.style.display = "none";
+        // }
 
     }
 
@@ -451,6 +516,10 @@
         button.addEventListener("click", function () {
             openEtage(id);
         }, false);
+
+        if (id != "about") {
+            button.parentElement.querySelector(".movingIn").style.display = "none";
+        }
 
         etage.style.display = "none";
     }
@@ -495,6 +564,8 @@
         currentEtage = document.getElementById(id);
         currentEtage.style.display = "block";
 
+        menuButtonDiv.innerHTML = "☜";
+
         toggleMenu(false);
     }
 
@@ -519,6 +590,9 @@
     }
 
 
+    function hideDisclaimer() {
+        document.getElementById("workInProgress").style.display = "none";
+    }
 
 
     //  showPage(0);
