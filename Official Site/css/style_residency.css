@@ -69,6 +69,11 @@ html, body {
     /* background-size: au auto; */
 }
 
+.etage{
+    margin-left: 20%;
+    margin-right:20%;
+}
+
 .menucontent {
     position: relative;
     /* margin:200 auto; */
@@ -94,6 +99,11 @@ html, body {
     font-family: HiraginoSans-W6;
     font-size: 80px;
     color: #000000;
+}
+
+.pageIndicator {
+    position:absolute;
+    right:0px;
 }
 
 h1 {
@@ -166,9 +176,48 @@ a {
     line-height: 62px;
 }
 
-#movingIn {
+.disclaimerBox {
+    position: fixed;
+    background: #FFFFFF;
+    padding: 10px;
+    height: auto;
+    left: 20%;
+    right: 20%;
+    z-index: 11;
+}
+
+.disclaimer {
+    font-size: 13px;
+    font-family: DINAlternate-Bold;
+    margin: 0;
+    text-align: center;
+}
+
+button {
+    padding: 0;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: inherit;
+    background: none
+  }
+  
+
+.movingIn {
+    position: relative;
+    padding: 8px;
+    margin: 80px;
+    vertical-align: middle;
     background: #0064FF;
+    transform: rotate(30deg);
+    top: -120px;
+    height: 34px;
+}
+
+.movingInText {
     color: white;
+    text-align: center;
+    font-size: 13px;
 }
 
 #instaBackground {
