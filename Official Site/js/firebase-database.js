@@ -138,13 +138,12 @@ function startDatabaseQueries(loadItems) {
                 var valuatedData = data.val().contents;
                 console.log(valuatedData);
 
-                insertAfter(createPostElement(user, data.key, valuatedData.title, valuatedData.description, valuatedData.hostenby, valuatedData.date, valuatedData.time),
+                insertAfter(createPostElement(user, data.key, valuatedData.title, valuatedData.description, valuatedData.tag, valuatedData.hostedby, valuatedData.location, valuatedData.date, valuatedData.timeto, valuatedData.timefrom, valuatedData.fblink),
                     child);
                 //Add the element on top of all elements
                 // containerElement.insertBefore(
                 //     createPostElement(user, data.key, data.val().claim, data.val().author, data.val().previewImg, admin),
                 //     child);
-
             }
         });
         postsRef.on('child_changed', function (data) {
@@ -162,7 +161,9 @@ function startDatabaseQueries(loadItems) {
             postElement.getElementsByClassName('description')[0].innerText = valuatedData.description;
             postElement.getElementsByClassName('room')[0].innerText = valuatedData.room;
             postElement.getElementsByClassName('date')[0].innerText = valuatedData.date;
-            postElement.getElementsByClassName('time')[0].innerText = valuatedData.time;
+            postElement.getElementsByClassName('time-from')[0].innerText = valuatedData.timefrom;
+            postElement.getElementsByClassName('time-to')[0].innerText = valuatedData.timeto;
+            postElement.getElementsByClassName('time-from')[0].innerText = valuatedData.fblink;
         });
         postsRef.on('child_removed', function (data) {
             //Just delete the post 
@@ -217,7 +218,7 @@ function insertAfter(newNode, referenceNode) {
 // }
 
 //Create a Cell
-function createPostElement(user, postId, title, description, room, date, time) {
+function createPostElement(user, postId, title, description, tag, host, room, date, timeto, timefrom, fblink) {
 
     // Create the DOM element from the HTML.
     var div = document.createElement('div');
@@ -227,9 +228,19 @@ function createPostElement(user, postId, title, description, room, date, time) {
     // Set values.
     postElement.getElementsByClassName('title')[0].innerText = title;// || 'Anonymous';
     postElement.getElementsByClassName('description')[0].innerText = description;
+    postElement.getElementsByClassName('tag')[0].innerText = tag;
+    postElement.getElementsByClassName('hosted-by')[0].innerText = host;
     postElement.getElementsByClassName('room')[0].innerText = room;
     postElement.getElementsByClassName('date')[0].innerText = date;
-    postElement.getElementsByClassName('time')[0].innerText = time;
+    postElement.getElementsByClassName('time-to')[0].innerText = timeto;
+    postElement.getElementsByClassName('time-from')[0].innerText = timefrom;
+
+    var fblinkdiv = postElement.getElementsByClassName('fb-link')[0];//.innerHTML = "facebook";
+    fblinkdiv.innerHTML = "facebook";
+    window.open(fblinkdiv.href, '_blank');
+
+    postElement.getElementsByClassName('fb-link')[0].setAttribute('href', fblink);
+
 
 
     //TODO: no idea how to get the image
@@ -339,13 +350,17 @@ function getStoreHTML(postID) {
         '<div class="callout">' +
         '<div class="thumbnail">BILD</div>' +
         '<div class="title">EVENT</div>' +
-        '<div class="date">zeit</div>' +
-        '<div class="time">zeit</div>' +
+        '<div class="date">DATUM</div>' +
+        '<div class="time-from">Zeit von</div>' +
+        '<div class="time-to">Zeit bis</div>' +
+        '<div class="tag">Tag</div>' +
+        '<div class="hosted-by">Organisiert von</div>' +
         '<div class="room">Raum 1</div>' +
         '<div class="description">' +
         'Beschrieb' +
         'Ende Beschrieb' +
         '</div>' +
+        '<a href="https://www.facebook.com/" class="fb-link" style="color:blue">Facebook Link</a>' +
         '</div>' +
         '</div>'
     return html;
