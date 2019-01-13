@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Residency</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href=" https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" />
+
+</head>
+
+<body>
+
+    <section id="page-splash">
+        <!-- <form action="" method="get" class="form-example"> -->
+
+        <div>
+            <label for="uname">
+                <b>Username</b>
+            </label>
+            <input id="sign-in-email" type="text" placeholder="Enter Username" autocomplete="username" name="uname"
+                required>
+            <label for="pw">
+                <b>Password</b>
+            </label>
+            <input id="sign-in-pw" type="password" placeholder="Enter Password" autocomplete="current-password" name="psw"
+                required>
+            <button id="sign-in-button-Google">
+                <i class="material-icons">account_circle</i>Admin Signin</button>
+
+
+        </div>
+        <!-- </form> -->
+    </section>
+
+    <section id="submissionForm">
+
+        <div class="mdc-tab-bar" role="tablist">
+            <div class="mdc-tab-scroller">
+                <div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll" style="margin-bottom: 0px;">
+                    <div class="mdc-tab-scroller__scroll-content" style="transform: none;">
+                        <button class="mdc-tab mdc-tab--active" role="tab" href="germanInput" aria-selected="true"
+                            tabindex="0">
+                            <div class="mdc-tab__content">
+
+                                <span class="mdc-tab__text-label">German</span>
+                            </div>
+                            <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline" style=""></span>
+                            </span>
+                            <div class="mdc-tab__ripple mdc-ripple-upgraded" style="--mdc-ripple-fg-size:67.95px; --mdc-ripple-fg-scale:1.95736; --mdc-ripple-fg-translate-start:-7.15469px, -0.725px; --mdc-ripple-fg-translate-end:22.65px, -9.975px;"></div>
+                        </button>
+                        <button class="mdc-tab" role="tab" href="frenchInput" aria-selected="false" tabindex="1">
+                            <div class="mdc-tab__content">
+                                <span class="mdc-tab__text-label">French</span>
+                            </div>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline" style=""></span>
+                            </span>
+                            <div class="mdc-tab__ripple mdc-ripple-upgraded" style="--mdc-ripple-fg-size:69.4594px; --mdc-ripple-fg-scale:1.94822; --mdc-ripple-fg-translate-start:13.6844px, -23.4289px; --mdc-ripple-fg-translate-end:23.1531px, -10.7297px;"></div>
+                        </button>
+                        <button class="mdc-tab" role="tab" href="italianInput" aria-selected="false" tabindex="2">
+                            <div class="mdc-tab__content">
+                                <span class="mdc-tab__text-label">Italian</span>
+                            </div>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline" style=""></span>
+                            </span>
+                            <div class="mdc-tab__ripple mdc-ripple-upgraded" style="--mdc-ripple-fg-size:79.0031px; --mdc-ripple-fg-scale:1.90053; --mdc-ripple-fg-translate-start:17.3148px, -21.8336px; --mdc-ripple-fg-translate-end:26.3344px, -15.5016px;"></div>
+                        </button>
+                        <button class="mdc-tab" role="tab" href="englishInput" aria-selected="false" tabindex="3">
+                            <div class="mdc-tab__content">
+                                <span class="mdc-tab__text-label">English</span>
+                            </div>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline" style=""></span>
+                            </span>
+                            <div class="mdc-tab__ripple mdc-ripple-upgraded" style="--mdc-ripple-fg-size:74.0156px; --mdc-ripple-fg-scale:1.9235; --mdc-ripple-fg-translate-start:50.6914px, -30.4609px; --mdc-ripple-fg-translate-end:24.6719px, -13.0078px;"></div>
+                        </button>
+                        <button class="mdc-tab" role="tab" aria-selected="false" href="generalInput" tabindex="4">
+                            <div class="mdc-tab__content">
+                                <span class="mdc-tab__text-label">Submit</span>
+                            </div>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline" style=""></span>
+                            </span>
+                            <div class="mdc-tab__ripple mdc-ripple-upgraded" style="--mdc-ripple-fg-size:69.6094px; --mdc-ripple-fg-scale:1.94734; --mdc-ripple-fg-translate-start:74.0391px, -22.293px; --mdc-ripple-fg-translate-end:23.2031px, -10.8047px;"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- German -->
+        <div id="germanInput">
+            <h3 class="mdc-typography--subtitle1">Event Erstellung</h3>
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="title_german" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Event Titel</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">Helper Text</p> -->
+            </div>
+
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="date-german" type="date" id="text-field--helper" class="mdc-text-field__input">
+                </div>
+            </div>
+            <!-- Description -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+                    <textarea id="description_german" class="mdc-text-field__input"></textarea>
+                    <label class="mdc-floating-label" for="description_german">Description German</label>
+                </div>
+            </div>
+
+
+            <!-- Win Code-->
+            <!--
+                
+            <div class="text-field-container--box">
+                <div class="mdc-text-field text-field--box mdc-text-field--upgraded">
+                    <input id="winItem_german" type="text" id="text-field--box" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--box">Wincode
+                        German</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>-->
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg"
+                            id="pw-validation-msg">Helper Text</p> -->
+            <!--</div> -->
+
+            <h3 class="mdc-typography--subtitle1">Pushnotification</h3>
+
+            <!-- Textarea -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="pushTitle_german" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Push
+                        Title German</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">Helper Text</p> -->
+            </div>
+            <!-- Textarea -->
+            <!-- Description -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+                    <textarea id="pushDesc_german" id="text-field-fullwidth-textarea" class="mdc-text-field__input"></textarea>
+                    <label class="mdc-floating-label" for="text-field-fullwidth-textarea">Push Description German</label>
+                </div>
+            </div>
+        </div>
+        <!---->
+
+        <!-- French -->
+        <div id="frenchInput">
+            <h3 class="mdc-typography--subtitle1">InApp Text</h3>
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="title_french" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Title
+                        french</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">Helper Text</p> -->
+            </div>
+
+            <!-- Description -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+                    <textarea id="description_french" class="mdc-text-field__input"></textarea>
+                    <label class="mdc-floating-label" for="description_french">Description french</label>
+                </div>
+            </div>
+
+            <!-- Win Code-->
+            <div class="text-field-container--box">
+                <div class="mdc-text-field text-field--box mdc-text-field--upgraded">
+                    <input id="winItem_french" type="text" id="text-field--box" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--box">Wincode
+                        french</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg"
+                                id="pw-validation-msg">Helper Text</p> -->
+            </div>
+
+            <h3 class="mdc-typography--subtitle1">Pushnotification</h3>
+
+            <!-- Textarea -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="pushTitle_french" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Push
+                        Title french</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">Helper Text</p> -->
+            </div>
+            <!-- Textarea -->
+            <!-- Description -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+                    <textarea id="pushDesc_french" id="text-field-fullwidth-textarea" class="mdc-text-field__input"></textarea>
+                    <label class="mdc-floating-label" for="text-field-fullwidth-textarea">Push Description french</label>
+                </div>
+            </div>
+        </div>
+        <!---->
+
+        <!-- italian -->
+        <div id="italianInput">
+            <h3 class="mdc-typography--subtitle1">InApp Text</h3>
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="title_italian" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Title
+                        italian</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">Helper Text</p> -->
+            </div>
+
+            <!-- Description -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+                    <textarea id="description_italian" class="mdc-text-field__input"></textarea>
+                    <label class="mdc-floating-label" for="description_italian">Description italian</label>
+                </div>
+            </div>
+
+            <!-- Win Code-->
+            <div class="text-field-container--box">
+                <div class="mdc-text-field text-field--box mdc-text-field--upgraded">
+                    <input id="winItem_italian" type="text" id="text-field--box" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--box">Wincode
+                        italian</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg"
+                                id="pw-validation-msg">Helper Text</p> -->
+            </div>
+
+            <h3 class="mdc-typography--subtitle1">Pushnotification</h3>
+
+            <!-- Textarea -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="pushTitle_italian" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Push
+                        Title italian</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">Helper Text</p> -->
+            </div>
+            <!-- Textarea -->
+            <!-- Description -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+                    <textarea id="pushDesc_italian" id="text-field-fullwidth-textarea" class="mdc-text-field__input"></textarea>
+                    <label class="mdc-floating-label" for="text-field-fullwidth-textarea">Push Description italian</label>
+                </div>
+            </div>
+        </div>
+        <!---->
+
+        <!-- english -->
+        <div id="englishInput">
+            <h3 class="mdc-typography--subtitle1">InApp Text</h3>
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="title_english" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Title
+                        english</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">Helper Text</p> -->
+            </div>
+
+            <!-- Description -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+                    <textarea id="description_english" class="mdc-text-field__input"></textarea>
+                    <label class="mdc-floating-label" for="description_english">Description english</label>
+                </div>
+            </div>
+
+            <!-- Win Code-->
+            <div class="text-field-container--box">
+                <div class="mdc-text-field text-field--box mdc-text-field--upgraded">
+                    <input id="winItem_english" type="text" id="text-field--box" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--box">Wincode
+                        english</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg"
+                                id="pw-validation-msg">Helper Text</p> -->
+            </div>
+
+            <h3 class="mdc-typography--subtitle1">Pushnotification</h3>
+
+            <!-- Textarea -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="pushTitle_english" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Push
+                        Title english</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">Helper Text</p> -->
+            </div>
+            <!-- Textarea -->
+            <!-- Description -->
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+                    <textarea id="pushDesc_english" id="text-field-fullwidth-textarea" class="mdc-text-field__input"></textarea>
+                    <label class="mdc-floating-label" for="text-field-fullwidth-textarea">Push Description english</label>
+                </div>
+            </div>
+        </div>
+        <!---->
+
+        <!-- Text input-->
+        <div id="generalInput">
+            <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="winner_code" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Winner
+                        Code</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+                <!-- <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">Helper Text</p> -->
+            </div>
+
+            <label class="mdc-typography--subtitle1" for="description_english">StartDate</label>
+            <input type="datetime-local" id="start_date" name="start_date" value="" in="2018-1-1" max="2028-1-1">
+            <br>
+            <label class="mdc-typography--subtitle1" for="description_english">EndDate</label>
+            <input type="datetime-local" id="end_date" name="end_date" value="" min="2018-1-1" max="2028-1-1">
+            <br>
+
+            <!-- <button class="foo-button mdc-button">Button</button> -->
+            <button class="mdc-button" id="debugDefaultValues">
+                DEBUG SUBMISSION
+            </button>
+            <button class="mdc-button" id="submit">
+                Submit
+            </button>
+            <!-- <button  id="debugDefaultValues" value="SUBMIT DEBUG" class="mdl-button--raised mdl-button mdl-js-button mdl-js-ripple-effect"> -->
+            <!-- <button  id="submit" value="submit" class="mdl-button--raised mdl-button mdl-js-button mdl-js-ripple-effect"> -->
+        </div>
+        </div>
+    </section>
+    <!-- <div id="congratulation" style="display:none">congratulations</div> -->
+</body>
+
+<head>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD52Vkl6CGe0ZK9BM-ISFbInmh82Bw12UQ",
+            authDomain: "residency-fe447.firebaseapp.com",
+            databaseURL: "https://residency-fe447.firebaseio.com",
+            projectId: "residency-fe447",
+            storageBucket: "residency-fe447.appspot.com",
+            messagingSenderId: "118663238849"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+    <script src="js/database.js"></script>
+    <script src="js/helper.js"></script>
+
+
+</head>
+
+<script>
+    console.log(mdc);
+
+    var tabs = [];
+
+    // mdc.lineRipple.MDCLineRipple.attachTo(document.querySelector('.mdc-line-ripple'));
+
+    //Text field initialisation
+    var x = document.getElementsByClassName('mdc-text-field');
+    var i;
+    for (i = 0; i < x.length; i++) {
+        // mdc.ripple.MDCRipple.attachTo(x[i]);
+        mdc.textField.MDCTextField.attachTo(x[i]);
+
+
+    }
+
+    var x = document.getElementsByClassName('mdc-line-ripple');
+    var i;
+    for (i = 0; i < x.length; i++) {
+        // mdc.ripple.MDCRipple.attachTo(x[i]);
+        mdc.lineRipple.MDCLineRipple.attachTo(x[i]);
+
+
+    }
+
+    // const tabBar = new MDCTabBar(document.querySelector('.mdc-tab-bar'));
+    var x = document.getElementsByClassName('mdc-tab-bar');
+    var i;
+    for (i = 0; i < x.length; i++) {
+        // mdc.ripple.MDCRipple.attachTo(x[i]);
+        mdc.tabBar.MDCTabBar.attachTo(x[i]);
+
+
+    }
+
+    var x = document.getElementsByClassName('mdc-tab-bar');
+    var i;
+    for (i = 0; i < x.length; i++) {
+        // mdc.ripple.MDCRipple.attachTo(x[i]);
+        mdc.tabBar.MDCTabBar.attachTo(x[i]);
+
+
+    }
+
+    var x = document.getElementsByClassName('mdc-button');
+    var i;
+    for (i = 0; i < x.length; i++) {
+        // mdc.ripple.MDCRipple.attachTo(x[i]);
+        mdc.ripple.MDCRipple.attachTo(x[i]);
+
+
+
+    }
+
+
+    var x = document.getElementsByClassName('mdc-tab');
+    var i;
+    for (i = 0; i < x.length; i++) {
+        // mdc.ripple.MDCRipple.attachTo(x[i]);
+        // mdc.tabBar.MDCTabBar.attachTo(x[i]);
+        x[i].onclick = function () {
+            // console.log(this.getAttribute("href"));
+            document.getElementById("germanInput").style.display = "none";
+            document.getElementById("frenchInput").style.display = "none";
+            document.getElementById("italianInput").style.display = "none";
+            document.getElementById("englishInput").style.display = "none";
+            document.getElementById("generalInput").style.display = "none";
+
+            document.getElementById(this.getAttribute("href")).style.display = "block";
+        };
+
+    }
+
+
+    var db = new databaseConnector();
+    // import { MDCLineRipple } from '@material/line-ripple';
+
+    // const lineRipple = new MDCLineRipple(document.querySelector('.mdc-line-ripple'));
+    // const foo = new MDCFoo(document.querySelector('.mdc-foo'));
+    // mdc.textfield.MDCTextField.attachTo(document.querySelector('.foo-button'));
+    // mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
+</script>
+
+</html>
