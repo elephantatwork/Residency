@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <title>Residency</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width", user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href=" https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" />
+
+</head>
+
+<body>
+    <section id="page-splash">
+
+        <div>
+            <label for="uname">
+                <b>Username</b>  
+            </label>
+            <input id="sign-in-email" type="text" placeholder="Enter Username" autocomplete="username" name="uname"
+            required>
+        <label for="pw">
+            <b>Password</b>
+        </label>
+        <input id="sign-in-pw" type="password" placeholder="Enter Password" autocomplete="current-password" name="psw"
+            required>
+        <button id="sign-in-button-Google">
+            <i class="material-icons">account_circle</i>Admin Signin</button>
+        </div>
+    </section>
+
+    <!-- Event Creation -->
+    <div id="event-creation" style.display="block">
+        <h3 class="mdc-typography--subtitle1">Event erstellen</h3>
+        <div class="text-field-container">
+            <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                <input id="event-title" type="text" id="text-field--helper" class="mdc-text-field__input">
+                <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Event Titel</label>
+                <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+            </div>
+        </div>
+
+        <!-- Date -->
+        <div class="text-field-container">
+            <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                <input id="date" type="date" id="text-field--helper" class="mdc-text-field__input">
+                <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Datum</label>
+                <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+            </div>
+        </div>
+
+        <!-- Time -->
+        <div class="text-field-container">
+            <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                <input id="time" type="time" id="text-field--helper" class="mdc-text-field__input">
+                <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Zeit</label>
+                <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+            </div>   
+        </div>
+
+        <!-- Room -->
+        <div class="text-field-container">
+            <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                <input id="location" type="text" id="text-field--helper" class="mdc-text-field__input">
+                <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Raum</label>
+                <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+            </div>
+        </div>
+
+        <!-- Hosted by -->
+        <div class="text-field-container">
+                <div class="mdc-text-field text-field mdc-text-field--upgraded">
+                    <input id="hosted-by" type="text" id="text-field--helper" class="mdc-text-field__input">
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="text-field--helper">Organisiert von</label>
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+                </div>
+            </div>
+
+        <!-- Description -->
+        <div class="text-field-container">
+            <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+                    <textarea id="description" class="mdc-text-field__input"></textarea>
+                    <label class="mdc-floating-label" for="description">Beschreibung</label>
+                    <!-- does not seem to be doing anything -->
+                    <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating" style="transform-origin: 53px center 0px;"></div>
+            </div>         
+        </div>
+
+        <button class="mdc-button" id="submit">
+            Erstellen
+        </button>
+
+
+    </div>
+</body>
+
+<head>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD52Vkl6CGe0ZK9BM-ISFbInmh82Bw12UQ",
+            authDomain: "residency-fe447.firebaseapp.com",
+            databaseURL: "https://residency-fe447.firebaseio.com",
+            projectId: "residency-fe447",
+            storageBucket: "residency-fe447.appspot.com",
+            messagingSenderId: "118663238849"
+        };
+        firebase.initializeApp(config);
+    </script>
+    
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+    <script src="js/database.js"></script>
+    <script src="js/helper.js"></script>    
+    <script src="js/firebase-upload.js"></script>    
+
+</head>
+
+<script>
+        console.log(mdc);
+    
+        //Text field initialisation
+        var x = document.getElementsByClassName('mdc-text-field');
+        var i;
+        for (i = 0; i < x.length; i++) {
+            mdc.textField.MDCTextField.attachTo(x[i]);
+        }
+    
+        var x = document.getElementsByClassName('mdc-line-ripple');
+        var i;
+        for (i = 0; i < x.length; i++) {
+            mdc.lineRipple.MDCLineRipple.attachTo(x[i]);  
+        }
+    
+        var x = document.getElementsByClassName('mdc-button');
+        var i;
+        for (i = 0; i < x.length; i++) {
+            // mdc.ripple.MDCRipple.attachTo(x[i]);
+            mdc.ripple.MDCRipple.attachTo(x[i]);  
+        }     
+        var db = new databaseConnector();
+    </script>
+
+
+</html>
