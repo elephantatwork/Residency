@@ -6,13 +6,16 @@ html, body {
 .contentPage {
     /* left:0px;
     right:0px; */
-    /* top: 0px; */
+    padding-top: 5%;
     width: 100%;
     height: 100%;
     touch-action: none;
     overflow-x: hidden;
     position: absolute;
     text-align: center;
+    /* background-image: url("../assets/img/tiny/light.png"); */
+    /* background-position: -200px ; */
+    /* background-size: auto; */
 }
 
 #landing {
@@ -60,7 +63,7 @@ html, body {
     top: 0px;
     right: 0px;
     bottom: 0px;
-    padding: 10% 10% 10% 10%;
+    padding: 10%;
     display: none;
     overflow: hidden;
     z-index: 10;
@@ -69,9 +72,9 @@ html, body {
     /* background-size: au auto; */
 }
 
-.etage{
+.etage {
     margin-left: 20%;
-    margin-right:20%;
+    margin-right: 20%;
 }
 
 .menucontent {
@@ -88,11 +91,13 @@ html, body {
 
 .menubutton {
     position: absolute;
-    /* left: 24px; */
-    /* top: 24px; */
+    left: 0;
+    top: 0;
+    text-align: left;
+    line-height: 0;
     z-index: 11;
-    /* width: 64px;
-    height: 64px; */
+    width: 64px;
+    height: 64px;
     /* background-image: url("../assets/img/swan.png"); */
     /* background-color: rgb(255, 255, 255);
     background-size: cover; */
@@ -102,8 +107,8 @@ html, body {
 }
 
 .pageIndicator {
-    position:absolute;
-    right:0px;
+    position: absolute;
+    right: 0px;
 }
 
 h1 {
@@ -113,6 +118,7 @@ h1 {
     word-wrap: break-word;
     color: #0064FF;
     text-align: center;
+    
 }
 
 h2 {
@@ -200,8 +206,7 @@ button {
     font: inherit;
     color: inherit;
     background: none
-  }
-  
+}
 
 .movingIn {
     position: relative;
@@ -236,50 +241,26 @@ button {
     background-size: auto;
 }
 
-#cell{
+#cell {}
 
-}
+#callout {}
 
-#callout{
+#thumbnail {}
 
-}
+#title {}
 
-#thumbnail{
+#date {}
 
-}
+#time-from {}
 
-#title{
+#time-to {}
 
-}
+#tag {}
 
-#date{
+#hosted-by {}
 
-}
+#room {}
 
-#time-from{
+#description {}
 
-}
-
-#time-to{
-
-}
-
-#tag{
-
-}
-
-#hosted-by{
-
-}
-
-#room{
-
-}
-
-#description{
-
-}
-
-#fb-link{
-    
-}
+#fb-link {}

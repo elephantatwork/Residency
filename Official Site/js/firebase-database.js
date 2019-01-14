@@ -126,7 +126,7 @@ function startDatabaseQueries(loadItems) {
             //We get one item too much from the server just don't do anything with that data
             if (!loadedKeys.includes(data.key)) {
 
-                console.log(data.key);
+                // console.log(data.key);
                 var containerElement = sectionElement;
 
                 //Save the entrykey for the next time we paginate
@@ -136,10 +136,10 @@ function startDatabaseQueries(loadItems) {
                 var child = containerElement.lastChild//( loadedKeys > 1) ? containerElement.lastChild : containerElement.firstChild;
 
                 var valuatedData = data.val().contents;
-                console.log(valuatedData);
-
-                insertAfter(createPostElement(user, data.key, valuatedData.title, valuatedData.description, valuatedData.tag, valuatedData.hostedby, valuatedData.location, valuatedData.date, valuatedData.timeto, valuatedData.timefrom, valuatedData.fblink),
-                    child);
+                // console.log(valuatedData);
+                if (valuatedData.public)
+                    insertAfter(createPostElement(user, data.key, valuatedData.title, valuatedData.description, valuatedData.tag, valuatedData.hostedby, valuatedData.location, valuatedData.date, valuatedData.timeto, valuatedData.timefrom, valuatedData.fblink),
+                        child);
                 //Add the element on top of all elements
                 // containerElement.insertBefore(
                 //     createPostElement(user, data.key, data.val().claim, data.val().author, data.val().previewImg, admin),
@@ -153,7 +153,7 @@ function startDatabaseQueries(loadItems) {
 
             //people can change all aspects of post
             sectionElement.querySelector("#" + data.key);
-            var postElement =  sectionElement.querySelector("#" + data.key).getElementsByClassName('callout')[0];
+            var postElement = sectionElement.querySelector("#" + data.key).getElementsByClassName('callout')[0];
             // Set values.
             console.log(postElement);
 
@@ -175,7 +175,7 @@ function startDatabaseQueries(loadItems) {
     //Grab only so many items 
     var query = firebase.database().ref(category);
     // unlockedPostsRef = query.endAt(null, lastKey).limitToLast(loadItems);//limitToFirst(loadItems);
-    console.log(category);
+    // console.log(category);
 
     // if (intial)    
     // unlockedPostsRef = query.orderByChild("unlockDate").limitToLast(loadItems);//limitToFirst(loadItems);
@@ -226,20 +226,18 @@ function createPostElement(user, postId, title, description, tag, host, room, da
     var postElement = div.firstChild;
 
     // Set values.
-    postElement.getElementsByClassName('title')[0].innerText = title;// || 'Anonymous';
-    postElement.getElementsByClassName('description')[0].innerText = description;
-    postElement.getElementsByClassName('tag')[0].innerText = tag;
-    postElement.getElementsByClassName('hosted-by')[0].innerText = host;
-    postElement.getElementsByClassName('room')[0].innerText = room;
-    postElement.getElementsByClassName('date')[0].innerText = date;
-    postElement.getElementsByClassName('time-to')[0].innerText = timeto;
-    postElement.getElementsByClassName('time-from')[0].innerText = timefrom;
+    postElement.getElementsByClassName('etitle')[0].innerText = title;// || 'Anonymous';
+    postElement.getElementsByClassName('edescription')[0].innerText = description;
+    postElement.getElementsByClassName('etag')[0].innerText = tag;
+    postElement.getElementsByClassName('ehosted-by')[0].innerText = host;
+    postElement.getElementsByClassName('eroom')[0].innerText = room;
+    postElement.getElementsByClassName('edate')[0].innerText = date;
+    postElement.getElementsByClassName('etime-to')[0].innerText = timeto;
+    postElement.getElementsByClassName('etime-from')[0].innerText = timefrom;
 
-    var fblinkdiv = postElement.getElementsByClassName('fb-link')[0];//.innerHTML = "facebook";
+    var fblinkdiv = postElement.getElementsByClassName('efb-link')[0];//.innerHTML = "facebook";
     fblinkdiv.innerHTML = "facebook";
-    window.open(fblinkdiv.href, '_blank');
-
-    postElement.getElementsByClassName('fb-link')[0].setAttribute('href', fblink);
+    fblinkdiv.setAttribute('href', fblink);
 
 
 
@@ -348,19 +346,19 @@ function getStoreHTML(postID) {
     var html =
         '<div class="cell" id="' + postID + '" >' +
         '<div class="callout">' +
-        '<div class="thumbnail">BILD</div>' +
-        '<div class="title">EVENT</div>' +
-        '<div class="date">DATUM</div>' +
-        '<div class="time-from">Zeit von</div>' +
-        '<div class="time-to">Zeit bis</div>' +
-        '<div class="tag">Tag</div>' +
-        '<div class="hosted-by">Organisiert von</div>' +
-        '<div class="room">Raum 1</div>' +
-        '<div class="description">' +
+        // '<div class="thumbnail">BILD</div>' +
+        '<div class="etitle">EVENT</div>' +
+        '<div class="edate">DATUM</div>' +
+        '<div class="etime-from">Zeit von</div>' +
+        '<div class="etime-to">Zeit bis</div>' +
+        '<div class="etag">Tag</div>' +
+        '<div class="ehosted-by">Organisiert von</div>' +
+        '<div class="eroom">Raum 1</div>' +
+        '<div class="edescription">' +
         'Beschrieb' +
         'Ende Beschrieb' +
         '</div>' +
-        '<a href="https://www.facebook.com/" class="fb-link" style="color:blue">Facebook Link</a>' +
+        '<a href="" class="efb-link" style="color:blue" target="_blank">Facebook Link</a>' +
         '</div>' +
         '</div>'
     return html;

@@ -22,10 +22,11 @@
         <button.lame class="disclaimerBox" onclick="hideDisclaimer()" id="workInProgress">
             <p class="disclaimer">Diese Website ist im stetigen Wandel<br>Hab keine Angst!</p>
         </button.lame>
-        <button class="menubutton" id="bMenu" onclick="toggleMenu()">&#9776;</button>
+        <button class="menubutton" id="bMenu" onclick="backAction()">x</button>
         <button class="pageIndicator">this is the landing</button>
     </div>
-    <div class="menu" id="menu">
+
+    <!-- <div class="menu" id="menu">
         <div class="menucontent">
             <div class="row">
                 <div class="col-4" style="height:80px">
@@ -96,19 +97,101 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="contentPage" id="landing">
-        <div class="title ">
-            <p>The Residency</p>
+        <div class="row" style="padding-top:10%">
+            <div class="col-12" id="title">
+                <h1>The Residency</h1>
+            </div>
+            <div class="col-4" style="height:80px">
+                <div>
+                    <h1 id="bE9">etage 9</h1>
+                    <div class="movingIn">
+                        <p class="movingInText">still moving in</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4" style="height:80px">
+                <div>
+                    <h1 id="bE8">etage 8</h1>
+                    <div class="movingIn">
+                        <p class="movingInText">still moving in</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4" style="height:80px">
+                <div>
+                    <h1 id="bE7">etage 7</h1>
+                    <div class="movingIn">
+                        <p class="movingInText">still moving in</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4" style="height:80px">
+                <h1 id="bE6">etage 6</h1>
+                <div class="movingIn">
+                    <p class="movingInText">still moving in</p>
+                </div>
+            </div>
+            <div class="col-4" style="height:80px">
+                <h1 id="bE5">etage 5</h1>
+                <div class="movingIn">
+                    <p class="movingInText">still moving in</p>
+                </div>
+            </div>
+            <div class="col-4" style="height:80px">
+                <h1 id="bE4">etage 4</h1>
+                <div class="movingIn">
+                    <p class="movingInText">still moving in</p>
+                </div>
+            </div>
+            <div class="col-4" style="height:80px">
+                <h1 id="bE3">etage 3</h1>
+                <div class="movingIn">
+                    <p class="movingInText">still moving in</p>
+                </div>
+            </div>
+            <div class="col-4" style="height:80px">
+                <h1 id="bE2">etage 2</h1>
+                <div class="movingIn">
+                    <p class="movingInText">still moving in</p>
+                </div>
+            </div>
+            <div class="col-4" style="height:80px">
+                <h1 id="bE1">etage 1</h1>
+                <div class="movingIn">
+                    <p class="movingInText">still moving in</p>
+                </div>
+            </div>
+            <div class="col-4" style="height:80px">
+                <h1 id="bevents" onclick="openEvents()">events</h1>
+            </div>
+            <div class="col-4">
+                <h1 id="babout">about</h1>
+            </div>
         </div>
-        <div class="description">
+        <!-- <div class="menu" id="menu"> -->
+        <!-- <div class="menucontent">
+            <div class="row">
+                
+            </div>
+        </div> -->
+        <!-- </div> -->
+        <!-- <div class="row">
+            <div class="col-6">
+                <p class="center" style="vertical-align:middle;">Events</p>
+            </div>
+            <div class="col-6">
+                <p class="center" style="vertical-align:middle;">Etages</p>
+            </div>
+        </div> -->
+        <!-- <div class="description">
             <p>kacke stinkt</p>
-        </div>
+        </div> -->
 
     </div>
     <div class="contentPage" id="events">Residency Events
-        <svg id="svg_events"></svg>
     </div>
 
     <div class="contentPage" id="description">
@@ -233,6 +316,8 @@
 <script src="js/libs/hammer.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.2/chroma.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+    crossorigin="anonymous"></script>
 
 
 <script src="js/libs/WebGL.js"></script>
@@ -244,7 +329,10 @@
 <!-- <script src="js/libs/stats.min.js"></script> -->
 
 <!-- <script src="js/house.js"></script> -->
-<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>
+
+
 <script>
     // Initialize Firebase
     var config = {
@@ -257,7 +345,10 @@
     };
     firebase.initializeApp(config);
 </script>
+
 <script src="js/firebase-database.js"></script>
+
+<script src="js/adminLogin.js"></script>
 
 
 <script>
@@ -265,7 +356,8 @@
     //UI
     var menuDiv = document.getElementById("menu");
     var menuButtonDiv = document.getElementById("bMenu");
-    var currentPage;
+    var currentPage = "main"; // hack
+
 
     // console.log(pageController);
     var landingDiv = document.getElementById("landing");
@@ -288,15 +380,16 @@
     // listen to events...
     mc_landing.on("panleft", function (ev) {
 
-        TweenMax.to(eventsDiv, 0.5, { left: "0%" });
-        currentPage = "events";
+        // TweenMax.to(eventsDiv, 0.5, { left: "0%" });
+        // currentPage = "events";
+        changePage("events");
     });
 
     mc_landing.on("panright", function (ev) {
 
-        TweenMax.to(descriptionDiv, 0.5, { right: "0%" });
-        currentPage = "descriptions";
-
+        // TweenMax.to(descriptionDiv, 0.5, { right: "0%" });
+        // currentPage = "descriptions";
+        changePage("descriptions");
     });
 
 
@@ -307,15 +400,18 @@
 
     mc_events.on("panright", function (ev) {
 
-        TweenMax.to(eventsDiv, 0.5, { left: "100%" });
-        currentPage = "main";
+        // TweenMax.to(eventsDiv, 0.5, { left: "100%" });
+        // currentPage = "main";
+        changePage("main");
+
     });
 
     // listen to events...
     mc_description.on("panleft", function (ev) {
 
-        TweenMax.to(descriptionDiv, 0.5, { right: "100%" });
-        currentPage = "main";
+        // TweenMax.to(descriptionDiv, 0.5, { right: "100%" });
+        // currentPage = "main";
+        changePage("main");
     });
 
     mc_description.on("panright", function (ev) {
@@ -331,7 +427,7 @@
 
         TweenMax.to(eventsDiv, 0.6, { left: "100%", delay: 0.2 });
         TweenMax.to(descriptionDiv, 0.4, { right: "100%", delay: 0.1 });
-
+        TweenMax.to(descriptionDiv, 0.5, { right: "0%" });
 
     }
 
@@ -458,39 +554,66 @@
         // console.log(controls);
     }
 
-
-
-
-
-
     //UI
-
-
-
     var menuVisible = true;
 
     function changePage(id) {
-       currentPage = id;
-       
-       if(currentPage == ""){
 
-       }else{
+        if (currentPage == id)
+            return;
 
-       }
+        console.log(id);
+        console.log(currentPage);
+
+        if (currentPage == "main") {
+            if (id == "events") {
+                TweenMax.to(eventsDiv, 0.5, { left: "0%" });
+            } else if (id == "descriptions") {
+                TweenMax.to(descriptionDiv, 0.5, { right: "0%" });
+
+            }
+        } else if (currentPage == "events") {
+            if (id == "descriptions") {
+            }
+            //Deactivate events
+            TweenMax.to(eventsDiv, 0.5, { left: "100%" });
+
+        } else if (currentPage == "descriptions") {
+            if (id == "events") {
+            }
+            //Deactivate descriptions
+            TweenMax.to(descriptionDiv, 0.5, { right: "100%" });
+        }
+
+        currentPage = id;
+        console.log("newPage: " + currentPage);
+    }
+
+
+    function backAction() {
+        if (currentPage == "main") {
+            console.log("shouldn't be active anyway")
+        } else if (currentPage == "events") {
+            TweenMax.to(eventsDiv, 0.5, { left: "100%" });
+            currentPage = "main";
+
+
+        } else if (currentPage == "descriptions") {
+            TweenMax.to(descriptionDiv, 0.5, { right: "100%" });
+            currentPage = "main";
+        }
     }
 
     function toggleMenu(state) {
-
-        console.log(state);
 
         state = state || !menuVisible;
 
         menuVisible = state;
 
         if (menuVisible) {
-            menuDiv.style.display = "block";
+            // menuDiv.style.display = "block"; // disabled for now
         } else {
-            menuDiv.style.display = "none";
+            // menuDiv.style.display = "none";
         }
 
 
@@ -528,32 +651,36 @@
     registerEtage("about");
 
     //Here we open the first etage
-    openEtage("about");
-    currentPage = "main"; // hack
+    // openEtage("about");
 
     function openEvents() {
         //if
-        if (currentPage != "events") {
+        // if (currentPage != "events") {
 
-            TweenMax.to(eventsDiv, 0.5, { left: "0%" });
-            TweenMax.to(descriptionDiv, 0.5, { right: "100%" });
+        //     TweenMax.to(eventsDiv, 0.5, { left: "0%" });
+        //     TweenMax.to(descriptionDiv, 0.5, { right: "100%" });
 
-            currentPage = "events";
-        }
+        //     currentPage = "events";
+        // }
+        changePage("events");
+        // TweenMax.to(eventsDiv, 0.5, { left: "100%" });
 
-        toggleMenu(false);
+
+        // toggleMenu(false);
 
     }
 
     function openEtage(id) {
 
         //if
-        if (currentPage != "descriptions") {
-            TweenMax.to(eventsDiv, 0.5, { left: "100%" });
-            TweenMax.to(descriptionDiv, 0.5, { right: "0%" });
+        // if (currentPage != "descriptions") {
+        //     TweenMax.to(eventsDiv, 0.5, { left: "100%" });
+        //     TweenMax.to(descriptionDiv, 0.5, { right: "0%" });
 
-            currentPage = "descriptions";
-        }
+        //     currentPage = "descriptions";
+        // }
+
+        changePage("descriptions");
 
         //If we already have something open close it
         if (currentEtage != null) {
