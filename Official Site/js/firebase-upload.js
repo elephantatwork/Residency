@@ -1,13 +1,13 @@
 'use strict';
 var databaseConnector = function () {
 
-    var signInButtonG = document.getElementById('sign-in-button-Google');
+    var signInButtonG = document.getElementById('sign-in-button');
     var email = document.getElementById('sign-in-email');
     var password = document.getElementById('sign-in-pw');
     var splashPage = document.getElementById('page-splash');
-    var signOutButton = document.getElementById('sign-out-button');
-    
-    var eventCreation = document.getElementById('event-creation');
+    // var signOutButton = document.getElementById('sign-out-button');
+    var submissionForm = document.getElementById('submissionForm');
+
 
     var title = document.getElementById('event-title');
     var date = document.getElementById('date');
@@ -18,20 +18,36 @@ var databaseConnector = function () {
     var tag = document.getElementById('tag');
     var description = document.getElementById('description');
     var fblink = document.getElementById('fb-link');
+    
 
     var submit = document.getElementById('submit');
-
-    var devicesTemplate = {};
 
     init();
 
     //Link all buttons to listen to clicks
     function init() {
         //added to bypass the admin
-        onAuthStateChanged(true);
+        // onAuthStateChanged(true);
 
-        submit.addEventListener('click', function() {
-            lockForm();
+
+        //Link sign in button to pprint proper errors
+        signInButtonG.addEventListener('click', function () {
+
+            firebase.auth().signInWithEmailAndPassword(email.value, password.value).catch(function (error) {            // firebase.auth().signInWithPopup(provider)
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorCode + " : " + errorMessage);
+            }).then(function (userNew) {
+
+
+            });
+        });
+
+        firebase.auth().onAuthStateChanged(onAuthStateChanged);
+
+
+        submit.addEventListener('click', function () {
             addNewEvent();
         });
 
@@ -45,18 +61,14 @@ var databaseConnector = function () {
         if (user) {
 
             splashPage.style.display = 'none';
-            //submissionForm.style.display = 'block';
+            submissionForm.style.display = 'block';
 
         } else {
 
             splashPage.style.display = 'block';
-            //submissionForm.style.display = 'none';
+            submissionForm.style.display = 'none';
 
         }
-    }
-
-    function lockForm() {
-        //? everything commented out in other file
     }
 
     function addNewEvent() {
@@ -69,20 +81,24 @@ var databaseConnector = function () {
                 timefrom: timefrom.value,
                 timeto: timeto.value,
                 location: location.value,
-                hostedby: hostedby.value,  
+                hostedby: hostedby.value,
                 tag: tag.value,
                 description: description.value,
                 fblink: fblink.value
-                }
             }
-
-        console.log(eventData);
+        }
 
         var updates = {};
         updates['NewEvent/' + newEventKey] = eventData;
 
-        firebase.database().ref().update(updates);
+        if (firebase.auth().currentUser) {
 
-        eventCreation
+            console.log("uploading :")
+            console.log(eventData);
+
+            firebase.database().ref().update(updates);
+        } else {
+            console.log("no user logged in")
+        }
     }
 }

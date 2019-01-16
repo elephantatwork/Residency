@@ -85,7 +85,7 @@
     var eventsDiv = document.getElementById("events");
     var descriptionDiv = document.getElementById("description");
 
-    var swipeThreshold = 140;
+    var swipeThreshold = 1000;
 
     var mc_landing = new Hammer(landingDiv);
     mc_landing.get('pan').set({ threshold: swipeThreshold });
@@ -101,14 +101,14 @@
     // listen to events...
     mc_landing.on("panleft", function (ev) {
 
-        TweenMax.to(eventsDiv, 0.5, { left: "0%" });
+        // TweenMax.to(eventsDiv, 0.5, { left: "0%" });
 
 
     });
 
     mc_landing.on("panright", function (ev) {
 
-        TweenMax.to(descriptionDiv, 0.5, { right: "0%" });
+        // TweenMax.to(descriptionDiv, 0.5, { right: "0%" });
 
 
     });
@@ -121,14 +121,14 @@
 
     mc_events.on("panright", function (ev) {
 
-        TweenMax.to(eventsDiv, 0.5, { left: "100%" });
+        // TweenMax.to(eventsDiv, 0.5, { left: "100%" });
 
     });
 
     // listen to events...
     mc_description.on("panleft", function (ev) {
 
-        TweenMax.to(descriptionDiv, 0.5, { right: "100%" });
+        // TweenMax.to(descriptionDiv, 0.5, { right: "100%" });
 
     });
 

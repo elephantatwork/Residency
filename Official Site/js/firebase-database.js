@@ -13,6 +13,8 @@ var startPageSize = 100;
 // var pageSize = 3;
 // var pageNR = 0;
 
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 var category = "NewEvent"; // "finalPosts"
 
 //The last loaded entry, used for pagination
@@ -71,80 +73,35 @@ function init() {
     // zip = new JSZip();
 }
 
-//Pagination Load more entries from the database
-// function pageMore() {
-
-//     pageNR++;
-
-//     startDatabaseQueries((pageSize * pageNR) + startPageSize, false);
-// }
-
-// function checkSettings() {
-//     //Get posts and assign callbacks to the server driven actions Added / Changed / Deleted
-//     var fetchPosts = function (postsRef) {
-//         postsRef.on('child_added', function (data) {
-
-//             //            if (data.key == "competitionOver") {
-//             //                votingOver = data.val();
-//             //            }
-//             //            if (data.key == "finalWeek") {
-//             //                category = (data.val()) ? "finalPosts" : "releasedPosts";
-//             //            }
-//             //            startDatabaseQueries(startPageSize, true);
-//             category = "releasedPosts";
-//         });
-//         postsRef.on('child_changed', function (data) {
-
-//             //            if (data.key == "competitionOver") {
-//             //                votingOver = data.val();
-//             //            }
-//             //            if (data.key == "finalWeek") {
-//             //                category = (data.val()) ? "finalPosts" : "releasedPosts";
-//             //            }
-//             category = "releasedPosts";
-//         });
-
-//     };
-
-//     //Grab only so many items 
-//     var query = firebase.database().ref("settings");
-
-//     // Fetching and displaying all posts of each sections.
-//     fetchPosts(query);
-
-//     //Start grabbing entries 
-
-// }
 
 //Starts listenting for new posts
 function startDatabaseQueries(loadItems) {
-
     //Get posts and assign callbacks to the server driven actions Added / Changed / Deleted
     var fetchPosts = function (postsRef, sectionElement, admin) {
         postsRef.on('child_added', function (data) {
 
             //We get one item too much from the server just don't do anything with that data
-            if (!loadedKeys.includes(data.key)) {
+            // if (!loadedKeys.includes(data.key)) {
 
-                console.log(data.key);
+                // console.log(data.key);
                 var containerElement = sectionElement;
 
                 //Save the entrykey for the next time we paginate
                 // lastKey = data.key;
-                loadedKeys.push(data.key);
+                // loadedKeys.push(data.key);
 
                 var child = containerElement.lastChild//( loadedKeys > 1) ? containerElement.lastChild : containerElement.firstChild;
 
                 var valuatedData = data.val().contents;
-                console.log(valuatedData);
-
-                insertAfter(createPostElement(user, data.key, valuatedData.title, valuatedData.description, valuatedData.tag, valuatedData.hostedby, valuatedData.location, valuatedData.date, valuatedData.timeto, valuatedData.timefrom, valuatedData.fblink),
-                    child);
+                // console.log(valuatedData);
+                // if (valuatedData.public)
+                    insertAfter(createPostElement(user, data.key, valuatedData.title, valuatedData.description, valuatedData.tag, valuatedData.hostedby, valuatedData.location, valuatedData.date, valuatedData.timeto, valuatedData.timefrom, valuatedData.fblink),
+                        child);
                 //Add the element on top of all elements
                 // containerElement.insertBefore(
                 //     createPostElement(user, data.key, data.val().claim, data.val().author, data.val().previewImg, admin),
                 //     child);
-            }
+            // }
         });
         postsRef.on('child_changed', function (data) {
             //The only thing that can change is the star count when others vote for the object
@@ -153,7 +110,7 @@ function startDatabaseQueries(loadItems) {
 
             //people can change all aspects of post
             sectionElement.querySelector("#" + data.key);
-            var postElement =  sectionElement.querySelector("#" + data.key).getElementsByClassName('callout')[0];
+            var postElement = sectionElement.querySelector("#" + data.key).getElementsByClassName('callout')[0];
             // Set values.
             console.log(postElement);
 
@@ -175,14 +132,12 @@ function startDatabaseQueries(loadItems) {
     //Grab only so many items 
     var query = firebase.database().ref(category);
     // unlockedPostsRef = query.endAt(null, lastKey).limitToLast(loadItems);//limitToFirst(loadItems);
-    console.log(category);
+    // console.log(category);
 
     // if (intial)    
     // unlockedPostsRef = query.orderByChild("unlockDate").limitToLast(loadItems);//limitToFirst(loadItems);
 
     unlockedPostsRef = query.limitToLast(loadItems);//limitToFirst(loadItems);
-    // else
-    //     unlockedPostsRef = query.endAt(null, loadedKeys[loadedKeys.length - 1]).limitToLast(loadItems);//limitToFirst(loadItems);
 
 
     // Fetching and displaying all posts of each sections.
@@ -197,26 +152,6 @@ function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode);
 }
 
-// //After the login check if there is a post ID
-// function checkViewer(postID) {
-
-//     //If there is no postID written with ?view=UUIDOfTheProject don't do a thing
-//     if (postID == "undefined" || postID == undefined) {
-//     } else {
-//         initializePreview(postID);
-//     }
-// }
-
-// //Open the preview
-// function initializePreview(previewNew) {
-
-//     document.getElementById("modules").src = "viewer/index.html?id=" + previewNew;
-//     overlay.style.display = "block";
-//     overlay.style.opacity = "0";
-//     TweenMax.to(overlay, 1, { opacity: 1, delay: 0.4 });
-
-// }
-
 //Create a Cell
 function createPostElement(user, postId, title, description, tag, host, room, date, timeto, timefrom, fblink) {
 
@@ -226,141 +161,118 @@ function createPostElement(user, postId, title, description, tag, host, room, da
     var postElement = div.firstChild;
 
     // Set values.
-    postElement.getElementsByClassName('title')[0].innerText = title;// || 'Anonymous';
-    postElement.getElementsByClassName('description')[0].innerText = description;
-    postElement.getElementsByClassName('tag')[0].innerText = tag;
-    postElement.getElementsByClassName('hosted-by')[0].innerText = host;
-    postElement.getElementsByClassName('room')[0].innerText = room;
-    postElement.getElementsByClassName('date')[0].innerText = date;
-    postElement.getElementsByClassName('time-to')[0].innerText = timeto;
-    postElement.getElementsByClassName('time-from')[0].innerText = timefrom;
+    var titleDiv = postElement.getElementsByClassName('etitle')[0];
+    titleDiv.innerHTML = '<a id="link">' + title + '</a>';// || 'Anonymous';
 
-    var fblinkdiv = postElement.getElementsByClassName('fb-link')[0];//.innerHTML = "facebook";
-    fblinkdiv.innerHTML = "facebook";
-    window.open(fblinkdiv.href, '_blank');
+    postElement.getElementsByClassName('ehosted-by')[0].innerHTML = tag.fontcolor("#0064FF") + " " + host.fontcolor("#F06A98");
+    postElement.getElementsByClassName('eroom')[0].innerHTML = "<br>" + room;
 
-    postElement.getElementsByClassName('fb-link')[0].setAttribute('href', fblink);
+    var formatedDate = new Date(date);
+    postElement.getElementsByClassName('edate')[0].innerHTML = formatedDate.getDate() + ". " + months[formatedDate.getMonth()] + " " + (timefrom + " ➪ " + timeto).fontcolor("#F06A98");
+    // postElement.getElementsByClassName('etime-to')[0].innerText = timeto;
+    // postElement.getElementsByClassName('etime-from')[0].innerText = timefrom;
+    // postElement.getElementsByClassName('etag')[0].innerText = tag;
 
+    postElement.getElementsByClassName('edescription')[0].innerText = description;
 
+    var openDescription = function () {
 
-    //TODO: no idea how to get the image
-    //postElement.getElementsByClassName('image')[0].
-    // postElement.getElementsByClassName('description')[0].innerText = claim;
+        var description = postElement.getElementsByClassName("edescription")[0];
+        var room = postElement.getElementsByClassName("eroom")[0];
 
-    // var star = postElement.getElementsByClassName('like')[0];
+        var newStyle = (description.style.display == "block") ? "none" : "block";
 
-    //Get the thumbnail element
-    // var preview = postElement.getElementsByClassName('thumbnail')[0];
+        description.style.display = newStyle;
+        room.style.display = newStyle;
 
-    //Download the thumbnail
-    // getThumbnail(preview, postId);
-
-    // //Function to open the preview 
-    // var openPreview = function () {
-
-    //     firebase.database().ref(postLocation).child(postId).once('value').then(function (snapshot) {
-
-    //         initializePreview(snapshot.key);
-    //     });
-    // }
-    // preview.onclick = openPreview;
+        //Add styling for title and background image
+        if (newStyle == "block") {
+            console.log(titleDiv);
+            titleDiv.querySelector("#link").style.color = "white";
+            titleDiv.style.backgroundColor =  "#0064FF";
 
 
-    // // Listen for likes counts.
-    // var starCountRef = firebase.database().ref(postLocation + postId + '/likeCount');
-    // starCountRef.on('value', function (snapshot) {
-    //     updateStarCount(postElement, snapshot.val());
-    // });
+        } else {
+            titleDiv.querySelector("#link").style.color = "";
+            titleDiv.style.backgroundColor = "";
 
-    // // Listen for the starred status.
-    // var starredStatusRef = firebase.database().ref(postLocation + postId + '/likes/' + user)
-    // starredStatusRef.on('value', function (snapshot) {
-    //     updateStarredByCurrentUser(postElement, snapshot.val());
-    // });
+        }
+    }
+    titleDiv.onclick = openDescription;
 
-    // // Keep track of all Firebase reference on which we are listening.
-    // listeningFirebaseRefs.push(starCountRef);
-    // listeningFirebaseRefs.push(starredStatusRef);
+    var fblinkdiv = postElement.getElementsByClassName('efb-link')[0];//.innerHTML = "facebook";
 
-    // // Bind starring action.
-    // var onStarClicked = function () {
-    //     if (!votingOver) {
-    //         var postRef = firebase.database().ref(postLocation + postId);
-    //         toggleLike(postRef, user);
-    //     }
-    // };
+    //Make sure there is an acutal fb event if not don't display the link
+    if (fblink != "") {
+        fblinkdiv.innerHTML = "facebook";
 
-    // star.onclick = onStarClicked;
+        fblinkdiv.setAttribute('href', fblink);
+    } else {
+        fblinkdiv.style.display = "none";
+    }
 
     return postElement;
 }
 
 //Downloads the thumbnail from the firebase storage
-function getThumbnail(thumbnail, id) {
+// function getThumbnail(thumbnail, id) {
 
-    //Get a link to the firebase storage
-    var storageRef = firebase.storage().ref();
+//     //Get a link to the firebase storage
+//     var storageRef = firebase.storage().ref();
 
-    // Create a reference to the file we want to download
-    var entriesRef = storageRef.child("texture/p_" + id + '.jpg');
+//     // Create a reference to the file we want to download
+//     var entriesRef = storageRef.child("texture/p_" + id + '.jpg');
 
-    // Get the download URL
-    entriesRef.getDownloadURL().then(function (url) {
+//     // Get the download URL
+//     entriesRef.getDownloadURL().then(function (url) {
 
-        thumbnail.querySelector("#img").setAttribute('src', url);
-    });
-}
+//         thumbnail.querySelector("#img").setAttribute('src', url);
+//     });
+// }
 
-//Update the like element @KAY CSS Shizzle
-function updateStarredByCurrentUser(postElement, starred) {
-    if (starred) {
-    } else {
-    }
-}
+// //Update the like element @KAY CSS Shizzle
+// function updateStarredByCurrentUser(postElement, starred) {
+//     if (starred) {
+//     } else {
+//     }
+// }
 
-//Update the like count of the postElement card text
-function updateStarCount(postElement, nbStart) {
-    postElement.getElementsByClassName('like-count')[0].innerText = nbStart;
-}
+// //Update the like count of the postElement card text
+// function updateStarCount(postElement, nbStart) {
+//     postElement.getElementsByClassName('like-count')[0].innerText = nbStart;
+// }
 
-//Do a transation and update the online like count
-function toggleLike(postRef, uid) {
-    console.log(uid);
-    postRef.transaction(function (post) {
-        if (post) {
-            if (post.likes && post.likes[uid]) {
-                post.likeCount--;
-                post.likes[uid] = null;
-            } else {
-                post.likeCount++;
-                if (!post.likes) {
-                    post.likes = {};
-                }
-                post.likes[uid] = true;
-            }
-        }
-        return post;
-    });
-}
+// //Do a transation and update the online like count
+// function toggleLike(postRef, uid) {
+//     console.log(uid);
+//     postRef.transaction(function (post) {
+//         if (post) {
+//             if (post.likes && post.likes[uid]) {
+//                 post.likeCount--;
+//                 post.likes[uid] = null;
+//             } else {
+//                 post.likeCount++;
+//                 if (!post.likes) {
+//                     post.likes = {};
+//                 }
+//                 post.likes[uid] = true;
+//             }
+//         }
+//         return post;
+//     });
+// }
 
 //The cell html which gets filled with data from the server
 function getStoreHTML(postID) {
     var html =
         '<div class="cell" id="' + postID + '" >' +
-        '<div class="callout">' +
-        '<div class="thumbnail">BILD</div>' +
-        '<div class="title">EVENT</div>' +
-        '<div class="date">DATUM</div>' +
-        '<div class="time-from">Zeit von</div>' +
-        '<div class="time-to">Zeit bis</div>' +
-        '<div class="tag">Tag</div>' +
-        '<div class="hosted-by">Organisiert von</div>' +
-        '<div class="room">Raum 1</div>' +
-        '<div class="description">' +
-        'Beschrieb' +
-        'Ende Beschrieb' +
-        '</div>' +
-        '<a href="https://www.facebook.com/" class="fb-link" style="color:blue">Facebook Link</a>' +
+        '<div class="row">' +
+        '<h1 class="col-12 etitle">EVENT</h1>' +
+        '<div class="col-6 edate">DATUM</div>' +
+        '<div class="col-6 ehosted-by">Organisiert von</div>' +
+        '<div class="col-12 eroom">Raum 1</div>' +
+        '<div class="col-12 edescription">Beschrieb</div>' +
+        '<h3 class="col-12" style="text-align:center" ><a href="" class="efb-link" style="color:blue; font-size:20px;" target="_blank">Facebook Link</a></h3>' +
         '</div>' +
         '</div>'
     return html;
