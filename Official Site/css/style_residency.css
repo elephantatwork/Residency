@@ -158,7 +158,7 @@ html, body {
 a {
     font-family: din_alternatebold;
     text-decoration: underline;
-    font-size: 60px;
+    /* font-size: 60px; */
     word-wrap: break-word;
     color: #0064FF;
     text-align: center;

@@ -84,7 +84,8 @@ var databaseConnector = function () {
                 hostedby: hostedby.value,
                 tag: tag.value,
                 description: description.value,
-                fblink: fblink.value
+                fblink: fblink.value,
+                public: "true"
             }
         }
 

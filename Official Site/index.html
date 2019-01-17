@@ -7,8 +7,8 @@
     <meta name="description" content="The Residency">
     <meta property="og:locale" content="de" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Studio ZAAK – Virtual Reality, Augmented Reality und 3D im Web" />
-    <meta property="og:description" content="Wir sind darauf spezialisiert interaktive Erlebnisse aus den Bereichen Virtual Reality, Augmented Reality und 3D Websiten zu designen und umzusetzen." />
+    <meta property="og:title" content="The Residency" />
+    <meta property="og:description" content="ein offspace der off.shore by Cabaret Voltaire" />
     <meta property="og:url" content="https://www.theresidency.ch/" />
     <meta property="og:site_name" content="The Residency" />
     <meta property="og:image" content="http://www.zaak.ch/img/zaak_logo.pngg" />
@@ -170,7 +170,7 @@
                     <p class="movingInText">still moving in</p>
                 </div>
             </div>
-         
+
         </div>
         <!-- <div class="menu" id="menu"> -->
         <!-- <div class="menucontent">
@@ -364,13 +364,14 @@
                     Coding massiert; es wird zusammen experimentiert und nichts wird in diesem Raum jemals fertig
                     sein.
                     Uns ist es wichtig, dass alles, was im Raum entsteht, auch im Raum bleibt – Mitwirken und
-                    Mitgestalten aber steht allen Interessierten offen.</p>
+                    Mitgestalten aber steht allen Interessierten offen.<br>Drum melde dich doch bei <a href="mailto:melangerie@theresidency.ch">uns</a> </p>
             </div>
             <div class="col-12" style="display:none" id="E9B">
-                    <h1 id="artistTitle"><a>Abwart</a></h1>
-                    <h2 id="artistName">Stefan Kaeser ( Hauptwart ) mit Samuel Vonäsch (Hilfswart)</h2>
-                    <p id="artistDescription" style="display:none">Wir sind für euch da. Und probieren unser Bestes.</p>
-                </div>
+                <h1 id="artistTitle"><a>Abwart</a></h1>
+                <h2 id="artistName"><a href="mailto:abwart@theresidency.ch">Stefan Kaeser</a> ( Hauptwart ) mit <a href="mailto:abwart@theresidency.ch">Samuel
+                        Vonäsch</a> (Hilfswart)</h2>
+                <p id="artistDescription" style="display:none">Wir sind für euch da. Und probieren unser Bestes.</p>
+            </div>
         </div>
         <div class="etage" id="about" style="display:block">
             <div class="row">
@@ -407,25 +408,25 @@
                     <h3 id="artistDescription" style="display:block">
                         Künstlerische Leitung & Organisation</h3>
                     <p id="artistDescription" style="display:block">
-                        Philipp Cron</p>
+                        <a href="mailto:phil@theresidency.ch">Philipp Cron</a></p>
                 </div>
                 <div class="col-4" id="vermietung">
                     <h3 id="artistDescription" style="display:block">
                         Raumvermietung</h3>
                     <p id="artistDescription" style="display:block">
-                        Seline Fülscher</p>
+                        <a href="mailto:seline@theresidency.ch">Seline Fülscher</a></p>
                 </div>
                 <div class="col-4" id="press">
                     <h3 id="artistDescription" style="display:block">
                         Presse</h3>
                     <p id="artistDescription" style="display:block">
-                        Ann Mbuti</p>
+                        <a href="mailto:presse@theresidency.ch">Ann Mbuti</a></p>
                 </div>
                 <div class="col-4" id="website">
                     <h3 id="artistDescription" style="display:block">
                         Website</h3>
                     <p id="artistDescription" style="display:block">
-                        Von Schick cooperative</p>
+                        <a href="mailto:julia@theresidency.ch">Von Schick cooperative</a></p>
                 </div>
             </div>
         </div>
@@ -859,17 +860,18 @@
         currentEtage = document.getElementById(id);
         currentEtage.style.display = "block";
 
-        
+
 
         toggleMenu(false);
     }
 
     function registerArtist(artistName) {
 
-        console.log(artistName);
         var _div = document.getElementById(artistName);
         _div.style.display = "block";
-        _div.addEventListener("click", function () {
+        console.log(_div);
+
+        _div.querySelector("#artistTitle").addEventListener("click", function () {
             toggleArtist(_div);
         }, false);
 
@@ -891,7 +893,8 @@
     }
 
     $('a').click(function (e) {
-        e.preventDefault();
+        if (e.target.href == "")
+            e.preventDefault();
     });
 
 
