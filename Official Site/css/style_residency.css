@@ -1,20 +1,15 @@
 @font-face {
     font-family: 'din_alternatebold';
-    src: url('fonts/din_alternate_bold-webfont.woff2') format('woff2'),
-         url('fonts/din_alternate_bold-webfont.woff') format('woff');
+    src: url('fonts/din_alternate_bold-webfont.woff2') format('woff2'), url('fonts/din_alternate_bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-
 }
 
 @font-face {
-    
     font-family: 'voltaire_serif_v2bold';
-    src: url('fonts/voltaire_serif_02_g_fixed-webfont.woff2') format('woff2'),
-         url('fonts/voltaire_serif_02_g_fixed-webfont.woff') format('woff');
+    src: url('fonts/voltaire_serif_02_g_fixed-webfont.woff2') format('woff2'), url('fonts/voltaire_serif_02_g_fixed-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-
 }
 
 html, body {
@@ -39,7 +34,6 @@ html, body {
 
 @media only screen and (max-width: 768px) {
     [class*="contentPage"] {
-
         padding-top: 15%;
         width: 100%;
         height: 100%;
@@ -176,7 +170,6 @@ a:visited {
 a:hover, a:active {
     color: #F06A98;
     cursor: pointer;
-
 }
 
 h1 {
@@ -214,7 +207,7 @@ h6 {
     word-wrap: break-word;
     color: #141414;
     text-align: center;
-    margin-top:0;
+    margin-top: 0;
     margin-bottom: 4%;
     z-index: 12;
 }
@@ -246,6 +239,17 @@ p {
     /* background-repeat: no-repeat;*/
     background-position: -200px -6%;
     background-size: cover;
+}
+
+#EventsToggl {
+    font-family: din_alternatebold;
+    position: absolute;
+    background: #0064FF;
+    color:white;
+    width: 95px;
+    height: 95px;
+    top: 5px;
+    right: 5px;
 }
 
 .waitforsmall {
@@ -342,12 +346,10 @@ button {
 .edate {
     text-align: right;
     font-family: din_alternatebold;
-
 }
 
 @media only screen and (max-width: 768px) {
     [class*="edate"] {
-
         text-align: center;
     }
 }
@@ -356,13 +358,10 @@ button {
     text-transform: lowercase;
     text-align: left;
     font-family: din_alternatebold;
-
 }
-
 
 @media only screen and (max-width: 768px) {
     [class*="ehosted-by"] {
-
         text-align: center;
     }
 }
@@ -376,4 +375,3 @@ button {
 }
 
 .efb-link {}
-

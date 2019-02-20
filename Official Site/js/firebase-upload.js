@@ -18,7 +18,7 @@ var databaseConnector = function () {
     var tag = document.getElementById('tag');
     var description = document.getElementById('description');
     var fblink = document.getElementById('fb-link');
-    
+
 
     var submit = document.getElementById('submit');
 
@@ -72,25 +72,23 @@ var databaseConnector = function () {
     }
 
     function addNewEvent() {
-        var newEventKey = firebase.database().ref().child('NewEvent').push().key;
+        var newEventKey = firebase.database().ref().child('UpcomingEvents').push().key;
 
         var eventData = {
-            contents: {
-                title: title.value,
-                date: date.value,
-                timefrom: timefrom.value,
-                timeto: timeto.value,
-                location: location.value,
-                hostedby: hostedby.value,
-                tag: tag.value,
-                description: description.value,
-                fblink: fblink.value,
-                public: "true"
-            }
+            title: title.value,
+            date: date.value,
+            timefrom: timefrom.value,
+            timeto: timeto.value,
+            location: location.value,
+            hostedby: hostedby.value,
+            tag: tag.value,
+            description: description.value,
+            fblink: fblink.value,
+            public: "true"
         }
 
         var updates = {};
-        updates['NewEvent/' + newEventKey] = eventData;
+        updates['UpcomingEvents/' + newEventKey] = eventData;
 
         if (firebase.auth().currentUser) {
 

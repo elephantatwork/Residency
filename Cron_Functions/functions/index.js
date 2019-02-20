@@ -3,148 +3,81 @@ const admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
 
-//Starts a competition and puts it from 
-// NewCompetition to ActiveCompetition
-exports.comp_start =
-  functions.pubsub.topic('start').onPublish((event) => {
-
-    const ref = admin.database().ref('NewCompetition/');
-    const now = Date.now();
-    return ref.orderByChild('start_date').limitToFirst(1).once('value', (snapshot) => {
-
-      var snap = snapshot.val();
-      var key;
-
-      console.log(snap);
-
-      if (snap != null) {
-
-        snapshot.forEach(function (childSnapshot) {
-          key = childSnapshot.key;
-        });
-        console.log(key);
+exports.dayOver =
+  functions.pubsub.topic('dayOver').onPublish((event) => {
 
 
-        var startDate = snapshot.child(key + "/start_date").val();
-
-        if (startDate < now) {
-
-          admin.database().ref('ActiveCompetition/').set(snap);
-
-          //Delete from NewCompetition
-          const updates = {};
-          snapshot.forEach(child => {
-            updates[child.key] = null;
-          });
-
-          // execute all updates in one go and return the result to end the function
-          return ref.update(updates);
-        } else {
-          // console.log("comp starts later");
-        }
-      }
-    });
-  });
-
-exports.comp_end =
-  functions.pubsub.topic('end').onPublish((event) => {
-
-    const ref = admin.database().ref('ActiveCompetition/');
+    const ref = admin.database().ref('UpcomingEvents/');
     const now = Date.now();
 
     return ref.once('value', (snapshot) => {
 
-      var snap = snapshot.val();
-      var key;
+      //Dictionary for all changed entries
+      const updates = {};
 
+      //Go though all released posts
       snapshot.forEach(function (childSnapshot) {
-        key = childSnapshot.key;
-        // console.log(ch)
-      });
 
-      var endDate = snapshot.child(key + "/end_date").val();
-      if (endDate < now) {
+        var key = childSnapshot.key;
+        var snap = childSnapshot.val();
 
-        var timeSinceEnded = new Date(now - endDate);
-        console.log("Competition ended " + timeSinceEnded + "ago.");
+        //Calculate the end date with the post's unlock date
+        var endDate = new Date(childSnapshot.child("/date").val()).getTime();
+        var hours = childSnapshot.child("/timeto").val().split(":");
+        var hoursMs = (+hours[0] * (60000 * 60)) + (+hours[1] * 60000);
+// console.log((+timeParts[0] * (60000 * 60)) + (+timeParts[1] * 60000));
+        // console.log(new Date(endDate+hoursMs));
+        // console.log(endDate + hoursMs);
+        // console.log(now);
 
-        //Get alldevices
-        var devices = snapshot.child(key + "/devices");
-        var rndDevice = Math.floor(Math.random() * devices.numChildren());
-        var i = 0;
-        var winKey = "";
-        devices.forEach(function (devicesSnap) {
-          if (rndDevice == i) {
-            winKey = devicesSnap.key;
+        //If the date plus the retireDelay already happened put the post into the finalPost category
+        if ((endDate+hoursMs) < now) {
 
+          updates['/PastEvents/' + key] = childSnapshot.val();
+
+          admin.database().ref().update(updates);
+
+          if (ref.child(key)) {
+            console.log("Remove key" + key);
+            ref.child(key).remove();
           }
-          i++;
-        });
-
-        console.log("competition won by: " + winKey);
-
-        //update
-        var endRef = admin.database().ref('EndedCompetition/');
-        endRef.update(snap);
-        endRef.child(key + "/").update({ "winner_device": winKey });
-
-
-        // Delete from ActiveCompetition
-        const updates = {};
-        snapshot.forEach(child => {
-          updates[child.key] = null;
-        });
-
-        // execute all updates in one go and return the result to end the function
-        return ref.update(updates);
-      } else {
-        // var timeUntilEnd = new Date(endDate - now);
-
-        // console.log("Competition ends in " + timeUntilEnd);
-      }
-    });
-  });
-
-exports.sendNotification = functions.database.ref('/ActiveCompetition')
-  .onCreate((snapshot, context) => {
-
-    snapshot.forEach(function (childSnapshot) {
-      key = childSnapshot.key;
+        }
+      
+      });
     });
 
 
-    var languages = ["german", "french", "italian", "english"];
-
-    for (var i = 0; i < languages.length; i++) {
-      // console.log(snapshot.val());
-      var title = snapshot.child(key + "/contents/push_title/" + languages[i]).val();
-      var description = snapshot.child(key + "/contents/push_desc/" + languages[i]).val();
-      var language = "global_" + languages[i];
-
-      payload = {
-        topic: language,
-        notification: {
-          title: title,
-          body: description,// + message.winner_code,
-          // icon: receiver.photoURL
-        },
-        // "data": {
-        //   "title": title,
-        //   "body": description,
-        // }
 
 
-      };
+    // return ref.once('value', (snapshot) => {
 
-      admin.messaging().send(payload)
-        .then(function (response) {
-          console.log("Successfully sent message:", response);
-        })
-        .catch(function (error) {
-          console.log("Error sending message:", error);
-        });
+    //   var snap = snapshot.val();
+    //   var key;
 
-    }
+    //   snapshot.forEach(function (childSnapshot) {
+    //     key = childSnapshot.key;
 
-    return true;
+    //     var endDate = new Date(snapshot.child(key + "/date").val()).getTime();
+
+    //     if (endDate < now) {
+
+    //       console.log(childSnapshot);
+
+    //       var timeSinceEnded = new Date(now - endDate);
+    //       console.log("Event ended " + timeSinceEnded + "ago.");
+
+    //       //update
+    //       var endRef = admin.database().ref('PastEvents/');
+    //       endRef.update(childSnapshot);
+
+    //       // Delete from ActiveCompetition
+    //       // const updates = {};
+    //       // snapshot.forEach(child => {
+    //       //   updates[child.key] = null;
+    //       // });
+
+    //       // return ref.update(updates);
+    //     }
+    //   });
+    // });
   });

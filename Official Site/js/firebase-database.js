@@ -1,10 +1,13 @@
 'use strict';
 //Divs which contain the lists of entries
-var unlockedPostsSection = document.getElementById('events');
-
+var upcomingEventsSection = document.getElementById('upcomingEvents');
+var pastEventsSection = document.getElementById('pastEvents');
 //For which firebase dbs are we listening to
 var listeningFirebaseRefs = [];
+var pastEventsRef;
+var upcomingEventsRef;
 var unlockedPostsRef;
+
 var unlockedTimingsRef;
 
 //Used to identifiy user to track who posted event
@@ -15,7 +18,7 @@ var startPageSize = 100;
 
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-var category = "NewEvent"; // "finalPosts"
+var category = "UpcomingEvents";
 
 //The last loaded entry, used for pagination
 var lastKey;
@@ -84,22 +87,26 @@ function startDatabaseQueries(loadItems) {
             // if (!loadedKeys.includes(data.key)) {
 
                 // console.log(data.key);
-                var containerElement = sectionElement;
+                // var containerElement = sectionElement;
+
+                console.log(sectionElement);
 
                 //Save the entrykey for the next time we paginate
                 // lastKey = data.key;
                 // loadedKeys.push(data.key);
 
-                var child = containerElement.lastChild//( loadedKeys > 1) ? containerElement.lastChild : containerElement.firstChild;
+                
 
-                var valuatedData = data.val().contents;
+                var child = sectionElement.lastChild;//( loadedKeys > 1) ? containerElement.lastChild : containerElement.firstChild;
+
+                var valuatedData = data.val();
                 // console.log(valuatedData);
                 // if (valuatedData.public)
                     insertAfter(createPostElement(user, data.key, valuatedData.title, valuatedData.description, valuatedData.tag, valuatedData.hostedby, valuatedData.location, valuatedData.date, valuatedData.timeto, valuatedData.timefrom, valuatedData.fblink),
                         child);
                 //Add the element on top of all elements
                 // containerElement.insertBefore(
-                //     createPostElement(user, data.key, data.val().claim, data.val().author, data.val().previewImg, admin),
+                //     createPostElement(user, data.key, valuatedData.title, valuatedData.description, valuatedData.tag, valuatedData.hostedby, valuatedData.location, valuatedData.date, valuatedData.timeto, valuatedData.timefrom, valuatedData.fblink),
                 //     child);
             // }
         });
@@ -130,26 +137,34 @@ function startDatabaseQueries(loadItems) {
     };
 
     //Grab only so many items 
-    var query = firebase.database().ref(category);
+    var queryUpcoming = firebase.database().ref("UpcomingEvents/");
+    var queryPast = firebase.database().ref("PastEvents/");
+
     // unlockedPostsRef = query.endAt(null, lastKey).limitToLast(loadItems);//limitToFirst(loadItems);
     // console.log(category);
 
     // if (intial)    
     // unlockedPostsRef = query.orderByChild("unlockDate").limitToLast(loadItems);//limitToFirst(loadItems);
 
-    unlockedPostsRef = query.limitToLast(loadItems);//limitToFirst(loadItems);
+    upcomingEventsRef = queryUpcoming.orderByChild("date").limitToFirst(loadItems);//limitToFirst(loadItems);
+    pastEventsRef = queryPast.orderByChild("date").limitToFirst(loadItems);//limitToFirst(loadItems);
 
 
     // Fetching and displaying all posts of each sections.
-    fetchPosts(unlockedPostsRef, unlockedPostsSection, category + "/");//""releasedPosts/");
+
+
+    fetchPosts(upcomingEventsRef, upcomingEventsSection, "UpcomingEvents" + "/");//""releasedPosts/");
+    fetchPosts(pastEventsRef, pastEventsSection, "PastEvents" + "/");//""releasedPosts/");
 
     // Keep track of all Firebase refs we are listening to.
-    listeningFirebaseRefs.push(unlockedPostsRef);
+    listeningFirebaseRefs.push(upcomingEventsRef);
+    listeningFirebaseRefs.push(pastEventsRef);
 
 }
 
 function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode);
+    console.log( referenceNode);
+    referenceNode.parentElement.insertBefore(newNode, referenceNode);
 }
 
 //Create a Cell
